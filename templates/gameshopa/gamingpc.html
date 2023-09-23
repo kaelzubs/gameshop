@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        {% include 'gameshopa/analytics.html' %}
+        {% include 'gameshopa/links.html' %}
+    </head>
+
+    <body>
+        {% include 'gameshopa/topbar.html' %}
+        {% include 'gameshopa/navbar.html' %}
+        {% block content %}
+        <!-- Products Start -->
+        <div class="container-fluid pt-5 pb-3">
+            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Gaming PC</span></h2>
+            <div class="row px-xl-5">
+                {% for s_obj in gaming_pc %}
+                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                    <div class="product-item bg-light mb-4">
+                        <div class="product-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="{{ s_obj.image.url }}" alt="{{ s_obj.title }}">
+                            <div class="product-action">
+                                <a href="{{ s_obj.get_absolute_url }}" class="btn btn-primary">Shop Now</a>
+                            </div>
+                        </div>
+                        <div class="text-center py-4">
+                            <a class="h6 text-decoration-none text-truncate" href="{{ s_obj.get_absolute_url }}">{{ s_obj.title }}</a>
+                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                <h5>${{ s_obj.price }}</h5><h6 class="text-muted ml-2"><del>${{ s_obj.discount_price }}</del></h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <nav class="d-flex justify-content-center align-items-center">
+                <ul class="pagination">
+                    <li class="page-item">
+                        {% if gaming_pc.has_previous %}
+                        <a class="page-link" href="?page={{ gaming_pc.previous_page_number }}">Previous</a>
+                        {% endif %}
+                    </li>
+                    <li class="page-item active">
+                        <span class="page-link">
+                            {{ gaming_pc.number }}
+                        <span class="sr-only">(current)</span>
+                        </span>
+                    </li>
+                    <li class="page-item">
+                        {% if gaming_pc.has_next %}
+                        <a class="page-link" href="?page={{ gaming_pc.next_page_number }}">Next</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <!-- Products End -->
+        {% endblock %}
+        {% include 'gameshopa/footer.html' %}
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+        {% include 'gameshopa/scripts.html' %}
+    </body>
+
+</html>

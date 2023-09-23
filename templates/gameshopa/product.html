@@ -1,0 +1,117 @@
+{% load static %}
+<!-- Feauture Products Start -->
+<div class="container-fluid pt-5 pb-3">
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Featured Products</span></h2>
+    <div class="row px-xl-5">
+        {% for f_obj in post_feauture_image %}
+        <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+            <div class="product-item bg-light mb-4">
+                <div class="product-img position-relative overflow-hidden">
+                    <img class="img-fluid w-100" src="{{ f_obj.image.url }}" alt="{{ f_obj.title }}">
+                    <div class="product-action">
+                        <a href="{{ f_obj.get_absolute_url }}" class="btn btn-primary">Shop Now</a>
+                    </div>
+                </div>
+                <div class="text-center py-4">
+                    <a class="h6 text-decoration-none text-truncate" href="{{ f_obj.get_absolute_url }}">{{ f_obj.title }}</a>
+                    <div class="d-flex align-items-center justify-content-center mt-2">
+                        <h5>${{ f_obj.price }}</h5><h6 class="text-muted ml-2"><del>${{ f_obj.discount_price }}</del></h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<!-- Feauture Products End -->
+
+
+<!--Special Offer 2 Start -->
+<div class="container-fluid pt-5 pb-3">
+    <div class="row px-xl-5">
+        {% for s_obj in post_special_offer_image_two %}
+        <div class="col-md-6">
+            <div class="product-offer mb-30" style="height: 300px;">
+                <img class="img-fluid" src="{{ s_obj.image.url }}" alt="{{ s_obj.title }}">
+                <div class="offer-text">
+                    <h3 class="text-white mb-3">Special Offer</h3>
+                    <a href="{{ s_obj.get_absolute_url }}" class="btn btn-primary">Shop Now</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<!-- Special Offer 2 End -->
+
+
+<!-- Recent Products Start -->
+<div class="container-fluid pt-5 pb-3">
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Recent Products</span></h2>
+    <div class="row px-xl-5">
+        {% for r_obj in post_recent_image %}
+        <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+            <div class="product-item bg-light mb-4">
+                <div class="product-img position-relative overflow-hidden">
+                    <img class="img-fluid w-100" src="{{ r_obj.image.url }}" alt="{{ r_obj.title }}">
+                    <div class="product-action">
+                        <a href="{{ r_obj.get_absolute_url }}" class="btn btn-primary">Shop Now</a>
+                    </div>
+                </div>
+                <div class="text-center py-4">
+                    <a class="h6 text-decoration-none text-truncate" href="{{ r_obj.get_absolute_url }}">{{ r_obj.title }}</a>
+                    <div class="d-flex align-items-center justify-content-center mt-2">
+                        <h5>${{ r_obj.price }}</h5><h6 class="text-muted ml-2"><del>${{ r_obj.discount_price }}</del></h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}           
+    </div>
+</div>
+<!-- Recent Products End -->
+
+<!-- Special Offer 3 Start -->
+<div class="container-fluid pt-5 pb-3">
+    <div class="row px-xl-5">
+        {% for s_obj in post_special_offer_image_three %}
+        <div class="col-md-6">
+            <div class="product-offer mb-30" style="height: 300px;">
+                <img class="img-fluid" src="{{ s_obj.image.url }}" alt="{{ s_obj.title }}">
+                <div class="offer-text">
+                    <h3 class="text-white mb-3">Special Offer</h3>
+                    <a href="{{ s_obj.get_absolute_url }}" class="btn btn-primary">Shop Now</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<!-- Special Offer 3 End -->
+
+
+<!-- BestSeller Products Start -->
+<div class="container-fluid pt-5 pb-3">
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Best Seller</span></h2>
+    <div class="row px-xl-5">
+        {% for b_obj in post_best_seller_image %}
+        <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+            <div class="product-item bg-light mb-4">
+                <div class="product-img position-relative overflow-hidden">
+                    <img class="img-fluid w-100" src="{{ b_obj.image.url }}" alt="{{ b_obj.title }}">
+                    <div class="product-action">
+                        <a href="{{ b_obj.get_absolute_url }}" class="btn btn-primary">Shop Now</a>
+                    </div>
+                </div>
+                <div class="text-center py-4">
+                    <a class="h6 text-decoration-none text-truncate" href="{{ b_obj.get_absolute_url }}">{{ b_obj.title }}</a>
+                    <div class="d-flex align-items-center justify-content-center mt-2">
+                        <h5>${{ b_obj.price }}</h5><h6 class="text-muted ml-2"><del>${{ b_obj.discount_price }}</del></h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}           
+    </div>
+</div>
+<!-- BestSeller Products End -->

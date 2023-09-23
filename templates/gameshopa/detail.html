@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        {% include 'gameshopa/analytics.html' %}
+        {% include 'gameshopa/links.html' %}
+    </head>
+
+    <body>
+        {% include 'gameshopa/topbar.html' %}
+        {% include 'gameshopa/navbar.html' %}
+        <!-- Shop Detail Start -->
+        <div class="container-fluid pb-5">
+            <div class="row px-xl-5">
+                <div class="col-lg-5 mb-30">
+                    <div id="product-carousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner bg-light">
+                            <div class="carousel-item active">
+                                <img class="w-100 h-100" src="{{ object.image.url }}" alt="{{ object.title }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-7 h-auto mb-30">
+                    <div class="h-100 bg-light p-30">
+                        <h3>{{ object.title }}</h3>
+                        <div class="d-flex align-items-left justify-content-left">
+                            <h3 class="font-weight-semi-bold mb-4">${{ object.price }}</h3><h5 class="text-muted ml-2"><del>${{ object.discount_price }}</del></h5>
+                        </div>
+                        <p class="mb-4">
+                            {{ object.description }}
+                        </p>
+                        <div class="d-flex align-items-center mb-4 pt-2">
+                            <a href="{{ object.aff_link }}" target="_blank" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Check Out</a>
+                        </div>
+                        <div class="d-flex pt-2">
+                            <strong class="text-dark mr-2">Share on:</strong>
+                            <div class="d-inline-flex">
+                                <a class="text-dark px-2" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https://gameshopa.com">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a class="text-dark px-2" target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=http://developer.linkedin.com&title=LinkedIn%20Developer%20Network&summary=My%20favorite%20developer%20program&source=LinkedIn">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                                <a class="text-dark px-2" target="_blank" href="whatsapp://send?text=urlencodedtext">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Shop Detail End -->
+        {% include 'gameshopa/footer.html' %}
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+        {% include 'gameshopa/scripts.html' %}
+    </body>
+
+</html>

@@ -1,0 +1,24 @@
+{% load cookielaw_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        {% include 'gameshopa/analytics.html' %}
+        {% include 'gameshopa/links.html' %}
+    </head>
+
+    <body>
+        {% include 'gameshopa/topbar.html' %}
+        {% include 'gameshopa/navbar.html' %}
+        {% include 'gameshopa/carousel.html' %}
+        {% include 'gameshopa/category.html' %}
+        {% include 'gameshopa/product.html' %}
+        {% include 'gameshopa/footer.html' %}
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+        {% include 'gameshopa/scripts.html' %}
+        {% cookielaw_banner %}
+    </body>
+
+</html>

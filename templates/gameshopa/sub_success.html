@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        {% include 'gameshopa/analytics.html' %}
+        {% include 'gameshopa/links.html' %}
+    </head>
+
+    <body>
+        {% include 'gameshopa/topbar.html' %}
+        {% include 'gameshopa/navbar.html' %}
+        {% block content %}
+        <!-- Contact Start -->
+        <div class="container-fluid">
+            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Subscription Successful</span></h2>
+            <div class="row px-xl-5">
+                <div class="col mb-5">
+                    <div class="contact-form bg-light p-30">
+                        <p>Your have subscribed to our email service successfully, Thank you.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Contact End -->
+        {% endblock %}
+        {% include 'gameshopa/footer.html' %}
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+        {% include 'gameshopa/scripts.html' %}
+    </body>
+
+</html>
