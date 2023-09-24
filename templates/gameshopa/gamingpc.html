@@ -41,12 +41,15 @@
                         <a class="page-link" href="?page={{ gaming_pc.previous_page_number }}">Previous</a>
                         {% endif %}
                     </li>
-                    <li class="page-item active">
-                        <span class="page-link">
-                            {{ gaming_pc.number }}
-                        <span class="sr-only">(current)</span>
-                        </span>
-                    </li>
+                    {% for n in gaming_pc.paginator.page_range %}
+                    {% if gaming_pc.number == n %}
+                        <li class="page-item active">
+                        <span class="page-link">{{ n }}<span class="sr-only">(current)</span></span>
+                        </li>
+                    {% elif n > gaming_pc.number|add:'-5' and n < gaming_pc.number|add:'5' %}
+                        <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+                    {% endif %}
+                    {% endfor %}
                     <li class="page-item">
                         {% if gaming_pc.has_next %}
                         <a class="page-link" href="?page={{ gaming_pc.next_page_number }}">Next</a>

@@ -41,12 +41,15 @@
                         <a class="page-link" href="?page={{ xbox.previous_page_number }}">Previous</a>
                         {% endif %}
                     </li>
-                    <li class="page-item active">
-                        <span class="page-link">
-                            {{ xbox.number }}
-                        <span class="sr-only">(current)</span>
-                        </span>
-                    </li>
+                    {% for n in xbox.paginator.page_range %}
+                    {% if xbox.number == n %}
+                        <li class="page-item active">
+                        <span class="page-link">{{ n }}<span class="sr-only">(current)</span></span>
+                        </li>
+                    {% elif n > xbox.number|add:'-5' and n < xbox.number|add:'5' %}
+                        <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+                    {% endif %}
+                    {% endfor %}
                     <li class="page-item">
                         {% if xbox.has_next %}
                         <a class="page-link" href="?page={{ xbox.next_page_number }}">Next</a>

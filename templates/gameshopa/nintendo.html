@@ -41,12 +41,15 @@
                         <a class="page-link" href="?page={{ nintendo.previous_page_number }}">Previous</a>
                         {% endif %}
                     </li>
-                    <li class="page-item active">
-                        <span class="page-link">
-                            {{ nintendo.number }}
-                        <span class="sr-only">(current)</span>
-                        </span>
-                    </li>
+                    {% for n in nintendo.paginator.page_range %}
+                    {% if nintendo.number == n %}
+                        <li class="page-item active">
+                        <span class="page-link">{{ n }}<span class="sr-only">(current)</span></span>
+                        </li>
+                    {% elif n > nintendo.number|add:'-5' and n < nintendo.number|add:'5' %}
+                        <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+                    {% endif %}
+                    {% endfor %}
                     <li class="page-item">
                         {% if nintendo.has_next %}
                         <a class="page-link" href="?page={{ nintendo.next_page_number }}">Next</a>

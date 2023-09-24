@@ -41,12 +41,15 @@
                         <a class="page-link" href="?page={{ playstation.previous_page_number }}">Previous</a>
                         {% endif %}
                     </li>
-                    <li class="page-item active">
-                        <span class="page-link">
-                            {{ playstation.number }}
-                        <span class="sr-only">(current)</span>
-                        </span>
-                    </li>
+                    {% for n in playstation.paginator.page_range %}
+                    {% if playstation.number == n %}
+                        <li class="page-item active">
+                        <span class="page-link">{{ n }}<span class="sr-only">(current)</span></span>
+                        </li>
+                    {% elif n > playstation.number|add:'-5' and n < playstation.number|add:'5' %}
+                        <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+                    {% endif %}
+                    {% endfor %}
                     <li class="page-item">
                         {% if playstation.has_next %}
                         <a class="page-link" href="?page={{ playstation.next_page_number }}">Next</a>

@@ -72,39 +72,23 @@ class SpecialOfferDetailView(DetailView):
 def search_list(request):
     query = request.GET.get('q')
     if query:
-        feature_list = FeautureProduct.objects.filter(
-            Q(title__icontains=query) |
-            Q(price__icontains=query) |
-            Q(discount_price__icontains=query) |
-            Q(slug__icontains=query) |
-            Q(description__icontains=query)
-        )
-        recent_list = RecentProduct.objects.filter(
-            Q(title__icontains=query) |
-            Q(price__icontains=query) |
-            Q(discount_price__icontains=query) |
-            Q(slug__icontains=query) |
-            Q(description__icontains=query)
-        )
-        best_list = BestSeller.objects.filter(
-            Q(title__icontains=query) |
-            Q(price__icontains=query) |
-            Q(discount_price__icontains=query) |
-            Q(slug__icontains=query) |
-            Q(description__icontains=query)
-        )
-        special_list = SpecialOffer.objects.filter(
-            Q(title__icontains=query) |
-            Q(price__icontains=query) |
-            Q(discount_price__icontains=query) |
-            Q(slug__icontains=query) |
-            Q(description__icontains=query)
-        )
+        feature_list = FeautureProduct.objects.filter(Q(title__icontains=query) |
+                                                      Q(price__icontains=query) |
+                                                      Q(description__icontains=query))
+        recent_list = RecentProduct.objects.filter(Q(title__icontains=query) |
+                                                   Q(price__icontains=query) |
+                                                   Q(description__icontains=query))
+        best_list = BestSeller.objects.filter(Q(title__icontains=query) |
+                                              Q(price__icontains=query) |
+                                              Q(description__icontains=query))
+        special_list = SpecialOffer.objects.filter(Q(title__icontains=query) |
+                                                   Q(price__icontains=query) |
+                                                   Q(description__icontains=query))
     else:
-        feature_list = FeautureProduct.objects.none
-        recent_list = RecentProduct.objects.none()
-        best_list = BestSeller.objects.none()
-        special_list = BestSeller.objects.none()
+        feature_list = FeautureProduct.objects.all()
+        recent_list = RecentProduct.objects.all()
+        best_list = BestSeller.objects.all()
+        special_list = BestSeller.objects.all()
 
     results = chain(feature_list, recent_list, best_list, special_list)
     results = list(results)
@@ -120,7 +104,7 @@ def search_list(request):
     forms = EmailSignupForm()
 
     return render(request, 'gameshopa/search.html', {
-        'object_list': page_obj,
+        'search_list': page_obj,
         'forms': forms
     })
 

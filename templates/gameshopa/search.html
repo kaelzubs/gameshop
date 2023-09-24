@@ -15,7 +15,7 @@
         <div class="container-fluid pt-5 pb-3">
             <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Search Result</span></h2>
             <div class="row px-xl-5">
-                {% for s_obj in object_list %}
+                {% for s_obj in search_list %}
                 <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                     <div class="product-item bg-light mb-4">
                         <div class="product-img position-relative overflow-hidden">
@@ -34,6 +34,29 @@
                 </div>
                 {% endfor %}
             </div>
+            <nav class="d-flex justify-content-center align-items-center">
+                <ul class="pagination">
+                    <li class="page-item">
+                        {% if search_list.has_previous %}
+                        <a class="page-link" href="?page={{ search_list.previous_page_number }}">Previous</a>
+                        {% endif %}
+                    </li>
+                    {% for n in search_list.paginator.page_range %}
+                    {% if search_list.number == n %}
+                        <li class="page-item active">
+                        <span class="page-link">{{ n }}<span class="sr-only">(current)</span></span>
+                        </li>
+                    {% elif n > search_list.number|add:'-5' and n < search_list.number|add:'5' %}
+                        <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    <li class="page-item">
+                        {% if search_list.has_next %}
+                        <a class="page-link" href="?page={{ search_list.next_page_number }}">Next</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </nav>
         </div>
         <!-- Products End -->
         {% endblock %}
