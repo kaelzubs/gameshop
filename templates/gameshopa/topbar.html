@@ -9,6 +9,7 @@
         </div>
         <div class="col-lg-4 col-5 text-left">
             <form method="GET" action="{% url 'core:search_list' %}">
+                {% csrf_token %}
                 <div class="input-group">
                     <input type="text" class="form-control" value="{{ request.GET.q }}" name="q" placeholder="Search for products">
                     <button class="btn btn-primary" type="submit"><i class="fa fa-search mr-1"></i> Search</button>

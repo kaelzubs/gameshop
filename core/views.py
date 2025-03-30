@@ -1,8 +1,8 @@
-from .models import FeautureProduct, RecentProduct, BestSeller, SpecialOffer, Sign_up
+from .models import FeautureProduct, FeautureProductImage, RecentProduct, RecentProductImage, BestSeller, BestSellerImage, SpecialOffer, SpecialOfferImage, Sign_up
 from django.views.generic import ListView, DetailView
 from django.db.models import Q
 from itertools import chain
-from django.shortcuts import render, redirect, HttpResponseRedirect
+from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import EmailSignupForm, ContactForms
 from django.conf import settings
@@ -13,7 +13,7 @@ from django.core.mail import send_mail, get_connection
 
 class FeautureProductListView(ListView):
     model = FeautureProduct
-    paginate_by = 8
+    paginate_by = 16
     template_name = "gameshopa/index.html"
     forms = EmailSignupForm()
     
@@ -27,12 +27,17 @@ class FeautureProductListView(ListView):
         context["post_special_offer_image_three"] = SpecialOffer.objects.all()[4:6]
         context['forms'] = EmailSignupForm()
         return context
-    
-    
+
 class FeautureProductDetailView(DetailView):
     model = FeautureProduct
     template_name = "gameshopa/detail.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['forms'] = EmailSignupForm()
+        product = FeautureProduct.objects.get(slug=self.kwargs['slug'])
+        context['product_images'] = FeautureProductImage.objects.filter(feauture_product=product)
+        return context
 
 ############################################
 class RecentProductListView(ListView):
@@ -44,6 +49,12 @@ class RecentProductDetailView(DetailView):
     model = RecentProduct
     template_name = "gameshopa/detail.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['forms'] = EmailSignupForm()
+        product = RecentProduct.objects.get(slug=self.kwargs['slug'])
+        context['product_images'] = RecentProductImage.objects.filter(recent_product=product)
+        return context
 
 #############################################
 class BestSellerListView(ListView):
@@ -55,6 +66,12 @@ class BestSellerDetailView(DetailView):
     model = BestSeller
     template_name = "gameshopa/detail.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['forms'] = EmailSignupForm()
+        product = BestSeller.objects.get(slug=self.kwargs['slug'])
+        context['product_images'] = BestSellerImage.objects.filter(best_product=product)
+        return context
 
 ############################################
 class SpecialOfferListView(ListView):
@@ -62,11 +79,18 @@ class SpecialOfferListView(ListView):
     paginate_by = 16
     template_name = "gameshopa/index.html"
     
+    
 class SpecialOfferDetailView(DetailView):
     paginate_by = 2
     model = SpecialOffer
     template_name = "gameshopa/detail.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['forms'] = EmailSignupForm()
+        product = SpecialOffer.objects.get(slug=self.kwargs['slug'])
+        context['product_images'] = SpecialOfferImage.objects.filter(special_product=product)
+        return context
 
 ############################################
 def search_list(request):
@@ -144,17 +168,17 @@ def playstation_list(request):
 #################################################################
 def xbox_list(request):
     list1 = FeautureProduct.objects.filter(Q(title__icontains="xbox")
-                                           | Q(description__icontains="xbox")
-                                           | Q(price__icontains="xbox"))
+                                    | Q(description__icontains="xbox")
+                                    | Q(price__icontains="xbox"))
     list2 = RecentProduct.objects.filter(Q(title__icontains="xbox")
-                                         | Q(description__icontains="xbox")
-                                         | Q(price__icontains="xbox"))
+                                    | Q(description__icontains="xbox")
+                                    | Q(price__icontains="xbox"))
     list3 = BestSeller.objects.filter(Q(title__icontains="xbox")
-                                      | Q(description__icontains="xbox")
-                                      | Q(price__icontains="xbox"))
+                                    | Q(description__icontains="xbox")
+                                    | Q(price__icontains="xbox"))
     list4 = SpecialOffer.objects.filter(Q(title__icontains="xbox")
-                                        | Q(description__icontains="xbox")
-                                        | Q(price__icontains="xbox"))
+                                    | Q(description__icontains="xbox")
+                                    | Q(price__icontains="xbox"))
 
     results = chain(list1, list2, list3, list4)
     results = list(results)

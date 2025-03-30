@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import FeautureProductListView, FeautureProductDetailView, RecentProductListView, RecentProductDetailView, BestSellerListView, BestSellerDetailView, SpecialOfferListView, SpecialOfferDetailView, search_list, playstation_list, xbox_list, nintendo_list, gaming_pc_list, contact_view, contact_success, about_view, email_list_signup, newsletter_success, terms, privacy, dmca_policy, affiliate_disclosure
+from .views import FeautureProductListView,FeautureProductDetailView, RecentProductListView, RecentProductDetailView, BestSellerListView, BestSellerDetailView, SpecialOfferListView, SpecialOfferDetailView, search_list, playstation_list, xbox_list, nintendo_list, gaming_pc_list, contact_view, contact_success, about_view, email_list_signup, newsletter_success, terms, privacy, dmca_policy, affiliate_disclosure
 
 app_name = 'core'
 

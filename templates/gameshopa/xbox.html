@@ -17,7 +17,7 @@
             <div class="row px-xl-5">
                 {% for s_obj in xbox %}
                 <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <div class="product-item bg-light mb-4">
+                    <div class="product-item bg-light mb-4 p-3">
                         <div class="product-img position-relative overflow-hidden">
                             <img class="img-fluid w-100" src="{{ s_obj.image.url }}" alt="{{ s_obj.title }}">
                             <div class="product-action">
@@ -25,9 +25,9 @@
                             </div>
                         </div>
                         <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="{{ s_obj.get_absolute_url }}">{{ s_obj.title }}</a>
+                            <a class="h6 text-decoration-none" href="{{ s_obj.get_absolute_url }}">{{ s_obj.title }}</a>
                             <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>${{ s_obj.price }}</h5><h6 class="text-muted ml-2"><del>${{ s_obj.discount_price }}</del></h6>
+                                <h5>${{ s_obj.price }}</h5>
                             </div>
                         </div>
                     </div>
