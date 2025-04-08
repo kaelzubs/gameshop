@@ -22,8 +22,8 @@
                         </ol>
                         <div class="carousel-inner bg-light" role="listbox">
                             {% for imge in product_images %}
-                            <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}" style="width: 100%; height: 40em;">
-                                <img style="object-fit: contain; overflow: hidden;" class="d-block img-fluid" src="{{ imge.image.url }}" alt="{{ imge.title }}">
+                            <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}">
+                                <img style="object-fit: scale-down; overflow: hidden; width: 100%; height: 100%;" class="d-block img-fluid" src="{{ imge.image.url }}" alt="{{ imge.title }}">
                             </div>
                             {% endfor %}
                         </div>
