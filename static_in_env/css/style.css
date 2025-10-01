@@ -99,17 +99,12 @@ address {
   line-height: inherit;
 }
 
-ol,
-ul,
-dl {
+ol,ul,dl {
   margin-top: 0;
   margin-bottom: 1rem;
 }
 
-ol ol,
-ul ul,
-ol ul,
-ul ol {
+ol ol,ul ul,ol ul,ul ol {
   margin-bottom: 0;
 }
 
@@ -9709,4 +9704,8 @@ a.text-dark:hover, a.text-dark:focus {
   100% {
     transform: translateY(-15px);
   }
+}
+
+.carouselId {
+  margin-top: -30px;
 }

@@ -1,5 +1,5 @@
 from django.contrib.sitemaps import Sitemap
-from core.models import FeautureProduct, RecentProduct, BestSeller, SpecialOffer
+from core.models import Product
 from itertools import chain
 
 
@@ -9,9 +9,6 @@ class StaticViewSitemap(Sitemap):
     priority = 0.5
 
     def items(self):
-        f = FeautureProduct.objects.all()
-        r = RecentProduct.objects.all()
-        b = BestSeller.objects.all()
-        s = SpecialOffer.objects.all()
-        frbs = chain(f,r,b,s)
-        return list(frbs)
+        p = Product.objects.all()
+        p = chain(p)
+        return list(p)

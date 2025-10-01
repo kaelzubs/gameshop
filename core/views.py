@@ -1,4 +1,4 @@
-from .models import FeautureProduct, FeautureProductImage, RecentProduct, RecentProductImage, BestSeller, BestSellerImage, SpecialOffer, SpecialOfferImage, Sign_up
+from .models import Product, ProductImage, Sign_up
 from django.views.generic import ListView, DetailView
 from django.db.models import Q
 from itertools import chain
@@ -11,110 +11,40 @@ import json
 from django.core.mail import send_mail, get_connection
 
 
-class FeautureProductListView(ListView):
-    model = FeautureProduct
-    paginate_by = 16
+class ProductListView(ListView):
+    model = Product
+    paginate_by = 40
     template_name = "gameshopa/index.html"
     forms = EmailSignupForm()
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["post_feauture_image"] = FeautureProduct.objects.all()
-        context["post_recent_image"] = RecentProduct.objects.all()
-        context["post_best_seller_image"] = BestSeller.objects.all()
-        context["post_special_offer_image_one"] = SpecialOffer.objects.all()[:2]
-        context["post_special_offer_image_two"] = SpecialOffer.objects.all()[2:4]
-        context["post_special_offer_image_three"] = SpecialOffer.objects.all()[4:6]
+        context["post_image"] = Product.objects.all()
         context['forms'] = EmailSignupForm()
         return context
 
-class FeautureProductDetailView(DetailView):
-    model = FeautureProduct
+class ProductDetailView(DetailView):
+    model = Product
     template_name = "gameshopa/detail.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['forms'] = EmailSignupForm()
-        product = FeautureProduct.objects.get(slug=self.kwargs['slug'])
-        context['product_images'] = FeautureProductImage.objects.filter(feauture_product=product)
+        product = Product.objects.get(slug=self.kwargs['slug'])
+        context['product_images'] = ProductImage.objects.filter(product=product)
         return context
 
-############################################
-class RecentProductListView(ListView):
-    model = RecentProduct
-    paginate_by = 16
-    template_name = "gameshopa/index.html"
-    
-class RecentProductDetailView(DetailView):
-    model = RecentProduct
-    template_name = "gameshopa/detail.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['forms'] = EmailSignupForm()
-        product = RecentProduct.objects.get(slug=self.kwargs['slug'])
-        context['product_images'] = RecentProductImage.objects.filter(recent_product=product)
-        return context
-
-#############################################
-class BestSellerListView(ListView):
-    model = BestSeller
-    paginate_by = 16
-    template_name = "gameshopa/index.html"
-    
-class BestSellerDetailView(DetailView):
-    model = BestSeller
-    template_name = "gameshopa/detail.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['forms'] = EmailSignupForm()
-        product = BestSeller.objects.get(slug=self.kwargs['slug'])
-        context['product_images'] = BestSellerImage.objects.filter(best_product=product)
-        return context
-
-############################################
-class SpecialOfferListView(ListView):
-    model = SpecialOffer
-    paginate_by = 16
-    template_name = "gameshopa/index.html"
-    
-    
-class SpecialOfferDetailView(DetailView):
-    paginate_by = 2
-    model = SpecialOffer
-    template_name = "gameshopa/detail.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['forms'] = EmailSignupForm()
-        product = SpecialOffer.objects.get(slug=self.kwargs['slug'])
-        context['product_images'] = SpecialOfferImage.objects.filter(special_product=product)
-        return context
-
-############################################
 def search_list(request):
     query = request.GET.get('q')
     if query:
-        feature_list = FeautureProduct.objects.filter(Q(title__icontains=query) |
-                                                      Q(price__icontains=query) |
-                                                      Q(description__icontains=query))
-        recent_list = RecentProduct.objects.filter(Q(title__icontains=query) |
-                                                   Q(price__icontains=query) |
-                                                   Q(description__icontains=query))
-        best_list = BestSeller.objects.filter(Q(title__icontains=query) |
-                                              Q(price__icontains=query) |
-                                              Q(description__icontains=query))
-        special_list = SpecialOffer.objects.filter(Q(title__icontains=query) |
-                                                   Q(price__icontains=query) |
-                                                   Q(description__icontains=query))
+        product_list = Product.objects.filter(Q(name__icontains=query) |
+                                                Q(price__icontains=query) |
+                                                Q(description__icontains=query))
     else:
-        feature_list = FeautureProduct.objects.all()
-        recent_list = RecentProduct.objects.all()
-        best_list = BestSeller.objects.all()
-        special_list = BestSeller.objects.all()
+        product_list = Product.objects.all()
 
-    results = chain(feature_list, recent_list, best_list, special_list)
+    results = product_list
     results = list(results)
     p = Paginator(results, 16) 
     page_number = request.GET.get('page')
@@ -134,20 +64,11 @@ def search_list(request):
 
 #################################################################
 def playstation_list(request):
-    list1 = FeautureProduct.objects.filter(Q(title__icontains="playstation")
+    plist = Product.objects.filter(Q(name__icontains="playstation")
                                            | Q(description__icontains="playstation")
                                            | Q(price__icontains="playstation"))
-    list2 = RecentProduct.objects.filter(Q(title__icontains="playstation")
-                                         | Q(description__icontains="playstation")
-                                         | Q(price__icontains="playstation"))
-    list3 = BestSeller.objects.filter(Q(title__icontains="playstation")
-                                      | Q(description__icontains="playstation")
-                                      | Q(price__icontains="playstation"))
-    list4 = SpecialOffer.objects.filter(Q(title__icontains="playstation")
-                                        | Q(description__icontains="playstation")
-                                        | Q(price__icontains="playstation"))
 
-    results = chain(list1, list2, list3, list4)
+    results = chain(plist)
     results = list(results)
     p = Paginator(results, 16) 
     page_number = request.GET.get('page')
@@ -167,20 +88,11 @@ def playstation_list(request):
 
 #################################################################
 def xbox_list(request):
-    list1 = FeautureProduct.objects.filter(Q(title__icontains="xbox")
-                                    | Q(description__icontains="xbox")
-                                    | Q(price__icontains="xbox"))
-    list2 = RecentProduct.objects.filter(Q(title__icontains="xbox")
-                                    | Q(description__icontains="xbox")
-                                    | Q(price__icontains="xbox"))
-    list3 = BestSeller.objects.filter(Q(title__icontains="xbox")
-                                    | Q(description__icontains="xbox")
-                                    | Q(price__icontains="xbox"))
-    list4 = SpecialOffer.objects.filter(Q(title__icontains="xbox")
+    xlist = Product.objects.filter(Q(name__icontains="xbox")
                                     | Q(description__icontains="xbox")
                                     | Q(price__icontains="xbox"))
 
-    results = chain(list1, list2, list3, list4)
+    results = chain(xlist)
     results = list(results)
     p = Paginator(results, 16) 
     page_number = request.GET.get('page')
@@ -199,20 +111,11 @@ def xbox_list(request):
     })
 
 def nintendo_list(request):
-    list1 = FeautureProduct.objects.filter(Q(title__icontains="nintendo")
+    nlist = Product.objects.filter(Q(name__icontains="nintendo")
                                            | Q(description__icontains="nintendo")
                                            | Q(price__icontains="nintendo"))
-    list2 = RecentProduct.objects.filter(Q(title__icontains="nintendo")
-                                         | Q(description__icontains="nintendo")
-                                         | Q(price__icontains="nintendo"))
-    list3 = BestSeller.objects.filter(Q(title__icontains="nintendo")
-                                      | Q(description__icontains="nintendo")
-                                      | Q(price__icontains="nintendo"))
-    list4 = SpecialOffer.objects.filter(Q(title__icontains="nintendo")
-                                        | Q(description__icontains="nintendo")
-                                        | Q(price__icontains="nintendo"))
 
-    results = chain(list1, list2, list3, list4)
+    results = chain(nlist)
     results = list(results)
     p = Paginator(results, 16) 
     page_number = request.GET.get('page')
@@ -231,20 +134,11 @@ def nintendo_list(request):
     })
 
 def gaming_pc_list(request):
-    list1 = FeautureProduct.objects.filter(Q(title__icontains="gaming pc")
+    glist = Product.objects.filter(Q(name__icontains="gaming pc")
                                            | Q(description__icontains="gaming pc")
                                            | Q(price__icontains="gaming pc"))
-    list2 = RecentProduct.objects.filter(Q(title__icontains="gaming pc")
-                                         | Q(description__icontains="gaming pc")
-                                         | Q(price__icontains="gaming pc"))
-    list3 = BestSeller.objects.filter(Q(title__icontains="gaming pc")
-                                      | Q(description__icontains="gaming pc")
-                                      | Q(price__icontains="gaming pc"))
-    list4 = SpecialOffer.objects.filter(Q(title__icontains="gaming pc")
-                                        | Q(description__icontains="gaming pc")
-                                        | Q(price__icontains="gaming pc"))
 
-    results = chain(list1, list2, list3, list4)
+    results = chain(glist)
     results = list(results)
     p = Paginator(results, 16) 
     page_number = request.GET.get('page')
