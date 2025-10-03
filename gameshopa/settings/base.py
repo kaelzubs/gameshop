@@ -10,7 +10,7 @@ key = "".join(secrets.choice(choices) for n in range(100))
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-SECRET_KEY = key #'kobl@t=yw9d*0y%jt2gjnq78=u!z_rrxb&w8e47l!(jz@m79zy' #config('SECRET_KEY')
+SECRET_KEY = key
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -71,7 +71,6 @@ USE_L10N = True
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
-
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_in_env')]
