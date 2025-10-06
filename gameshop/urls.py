@@ -21,6 +21,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('', include('core.urls', namespace='core')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}),
+    path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.png'), permanent=True)),
     path("ads.txt", RedirectView.as_view(url=staticfiles_storage.url("ads.txt")))
 ]
 
