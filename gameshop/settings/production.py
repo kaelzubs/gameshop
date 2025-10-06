@@ -29,7 +29,7 @@ STORAGES = {
 #     },
 # }
 
-STATICFILES_STORAGE = "storages.backends.s3.S3Storage"
+# STATICFILES_STORAGE = "storages.backends.s3.S3Storage"
 
 DATABASES = {
     'default': {
