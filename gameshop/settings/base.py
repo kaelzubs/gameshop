@@ -44,6 +44,15 @@ MIDDLEWARE = [
     'django.middleware.gzip.GZipMiddleware',
 ]
 
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
+
 ROOT_URLCONF = 'gameshop.urls'
 
 TEMPLATES = [
