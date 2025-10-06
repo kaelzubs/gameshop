@@ -14,10 +14,10 @@ if not DEBUG:
     X_FRAME_OPTIONS = 'DENY'
     STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    STATICFILES_STORAGE = "storages.backends.s3.S3Storage"
 
 ALLOWED_HOSTS = ['gameshop.onrender.com', 'gameshop-9nk6.onrender.com']
-STORAGES = {"staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"}}
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
@@ -31,9 +31,18 @@ STORAGES = {
         "BACKEND": "storages.backends.s3.S3Storage",
     },
     "staticfiles": {
-        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
+# STORAGES = {
+#     "default": {
+#         "BACKEND": "django.core.files.storage.FileSystemStorage",
+#     },
+#     "staticfiles": {
+#         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+#     },
+# }
 
 STATICFILES_STORAGE = "storages.backends.s3.S3Storage"
 
