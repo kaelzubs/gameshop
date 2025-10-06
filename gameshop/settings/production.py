@@ -1,6 +1,16 @@
 from .base import *
+from decouple import config
 
 DEBUG = config('DEBUG', cast=bool)
+STORAGES = {"staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"}}
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
 ALLOWED_HOSTS = ['gameshop.onrender.com', 'gameshop-9nk6.onrender.com']
 
 AUTH_PASSWORD_VALIDATORS = [
