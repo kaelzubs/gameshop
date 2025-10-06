@@ -28,8 +28,8 @@ STORAGES = {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
-
-STATICFILES_STORAGE = "storages.backends.s3.S3Storage"
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+# STATICFILES_STORAGE = "storages.backends.s3.S3Storage"
 
 DATABASES = {
     'default': {
