@@ -9,7 +9,7 @@ class ImageInline(admin.TabularInline):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ("name","created_at")
-    search_fields = ("name","slug","variants__sku")
+    search_fields = ("name","slug")
     inlines = [ImageInline]
     prepopulated_fields = {'slug': ('name',),}
 

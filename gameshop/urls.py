@@ -12,12 +12,12 @@ sitemaps = {
     'static': StaticViewSitemap,
 }
 
-admin.site.site_header = "GAMESHOPA ADMIN"
-admin.site.site_title = "Gameshopa Admin Portal"
-admin.site.index_title = "Welcome to Gameshopa Admin Portal"
+admin.site.site_header = "GAMESHOP ADMIN"
+admin.site.site_title = "Gameshop Admin Portal"
+admin.site.index_title = "Welcome to Gameshop Admin Portal"
 
 urlpatterns = [
-    path('gameshopa-admin-portal/', admin.site.urls),
+    path('gameshop-admin-portal/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('', include('core.urls', namespace='core')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}),

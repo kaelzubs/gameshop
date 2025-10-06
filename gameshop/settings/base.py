@@ -44,7 +44,7 @@ MIDDLEWARE = [
     'django.middleware.gzip.GZipMiddleware',
 ]
 
-ROOT_URLCONF = 'gameshopa.urls'
+ROOT_URLCONF = 'gameshop.urls'
 
 TEMPLATES = [
     {
@@ -62,7 +62,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'gameshopa.wsgi.application'
+WSGI_APPLICATION = 'gameshop.wsgi.application'
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
@@ -107,7 +107,7 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Email recieved from gameshopa.com'
+ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Email recieved from gameshop.com'
 DEFAULT_FROM_EMAIL = 'kaelzubs@gmail.com'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
