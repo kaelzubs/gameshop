@@ -35,6 +35,8 @@ STORAGES = {
     },
 }
 
+STATICFILES_STORAGE = "storages.backends.s3.S3Storage"
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
