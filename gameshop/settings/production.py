@@ -11,8 +11,6 @@ if DEBUG:
     SECURE_REFERRER_POLICY = "same-origin"
     SECURE_CONTENT_TYPE_NOSNIFF = True
     X_FRAME_OPTIONS = 'DENY'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
         
 
 ALLOWED_HOSTS = ['gameshop.onrender.com', '*']
