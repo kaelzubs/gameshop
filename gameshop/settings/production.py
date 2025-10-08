@@ -31,9 +31,3 @@ DATABASES = {
         ssl_require=True
     )
 }
-
-STORAGES = {
-    'static_root': {
-        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
-    },
-}
