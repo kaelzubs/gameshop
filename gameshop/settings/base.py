@@ -78,9 +78,9 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_in_env')]
 if not DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-    STATICFILES_STORAGE = "whitenoise.django.GzipManifestStaticFilesStorage"
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    # STATICFILES_STORAGE = "whitenoise.django.GzipManifestStaticFilesStorage"
 
 # Auth
 AUTHENTICATION_BACKENDS = (
