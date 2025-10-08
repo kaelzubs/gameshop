@@ -73,12 +73,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
     
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_in_env')]
+
 if not DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Auth
