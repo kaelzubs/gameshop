@@ -1,20 +1,8 @@
 from .base import *
 
-DEBUG = False
+DEBUG = config('DEBUG', cast=bool)
 ALLOWED_HOSTS = ['127.0.0.1', '*']
 
-if not DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
-STORAGES = {
-    "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
-    },
-}
 
 DATABASES = {
     'default': {
