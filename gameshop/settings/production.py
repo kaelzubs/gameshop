@@ -26,7 +26,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://gameshop_rcll_user:jIHt3ZWcPkGGpbJCDrr8hFQcMiDYTULD@dpg-d3hn07e3jp1c73fm41j0-a.oregon-postgres.render.com/gameshop_rcll'
+        default='postgresql://gameshop_rcll_user:jIHt3ZWcPkGGpbJCDrr8hFQcMiDYTULD@dpg-d3hn07e3jp1c73fm41j0-a.oregon-postgres.render.com/gameshop_rcll',
         conn_max_age=600,
         ssl_require=True
     )
