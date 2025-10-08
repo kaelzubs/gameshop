@@ -33,7 +33,7 @@ DATABASES = {
 }
 
 STORAGES = {
-    'staticfiles': {
+    'static_root': {
         'BACKEND”: “whitenoise.storage.CompressedManifestStaticFilesStorage',
     },
 }
