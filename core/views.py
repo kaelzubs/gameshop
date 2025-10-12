@@ -249,13 +249,13 @@ def handler404(request, exception):
     response.status_code = 404
     return response
 
-def handler500(request):
-    forms = EmailSignupForm()
-    response = render(request, "gameshopa/error_500.html", {
-        'forms': forms
-    })
-    response.status_code = 500
-    return response
+# def handler500(request):
+#     forms = EmailSignupForm()
+#     response = render(request, "gameshopa/error_500.html", {
+#         'forms': forms
+#     })
+#     response.status_code = 500
+#     return response
 
 def terms(request):
     forms = EmailSignupForm()
