@@ -77,6 +77,17 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_in_env')]
 MEDIAFILES_DIRS = [os.path.join(BASE_DIR, 'media_in_env')]
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
+STATICFILES_STORAGE = "gameshop.storage.WhiteNoiseStaticFilesStorage"
+MEDIAFILES_STORAGE = "gameshop.storage.MediaStorage"
+
+STORAGES = {
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+    },
+}
+
 # Auth
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
