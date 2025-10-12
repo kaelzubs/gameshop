@@ -7,12 +7,9 @@ import string
 choices = string.ascii_letters + string.digits + "<>()[]*?@!#~,.;"
 key = "".join(secrets.choice(choices) for n in range(100))
 
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 SECRET_KEY = key
-
-DEBUG = False
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -75,17 +72,15 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_in_env')]
-if not DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
-STORAGES = {
-    'staticfiles': {
-        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
-    },
-}
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 
 # Auth
 AUTHENTICATION_BACKENDS = (
@@ -115,3 +110,22 @@ MAILCHIMP_DATA_CENTER = config('MAILCHIMP_DATA_CENTER')
 MAILCHIMP_EMAIL_LIST_ID = config('MAILCHIMP_EMAIL_LIST_ID')
 
 ROBOTS_CACHE_TIMEOUT = 60*60*24
+ROBOTS_USE_SITEMAP = True
+ROBOTS_SITEMAP_URLS = ['https://www.gameshop.com/sitemap.xml']
+ROBOTS_DISALLOW_ALL = False
+ROBOTS_ALLOW_ALL = True
+ROBOTS_SITEMAP_URL = 'https://www.gameshop.com/sitemap.xml'
+ROBOTS_HOST = 'https://www.gameshop.com'
+COOKIELAW_NAME = 'CookieLawInfoConsent'
+COOKIELAW_VERBOSE_NAME = 'Cookie Consent'
+COOKIELAW_MAX_AGE = 31536000  # one year
+COOKIELAW_PATH = '/'
+COOKIELAW_SECURE = False
+COOKIELAW_SAMESITE = 'Lax'
+COOKIELAW_MESSAGE = 'This website uses cookies to ensure you get the best experience on our website.'
+COOKIELAW_DISMISS = 'Got it!'
+COOKIELAW_LEARN_MORE = 'More info'
+COOKIELAW_LINK = '/privacy-policy/'
+COOKIELAW_THEME = 'dark-bottom'
+COOKIELAW_POSITION = 'bottom'
+COOKIELAW_TYPE = 'info'
