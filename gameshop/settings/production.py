@@ -8,7 +8,8 @@ ALLOWED_HOSTS = ['gameshop.onrender.com', 'gameshop-9nk6.onrender.com']
 if not DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
-    STATICFILES_STORAGE = "gameshop.storage.WhiteNoiseStaticFilesStorage"
+    # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
 STORAGES = {
     'staticfiles': {
