@@ -7,7 +7,8 @@ import string
 choices = string.ascii_letters + string.digits + "<>()[]*?@!#~,.;"
 key = "".join(secrets.choice(choices) for n in range(100))
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = key
 
@@ -82,8 +83,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_env')]
-MEDIAFILES_DIRS = [os.path.join(BASE_DIR, 'media_env')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+MEDIAFILES_DIRS = [os.path.join(BASE_DIR, 'media')]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
