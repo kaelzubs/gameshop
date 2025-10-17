@@ -12,10 +12,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = key
 
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = True
 
 if DEBUG == True:
-    ALLOWED_HOSTS = ['localhost']
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 elif DEBUG == False:
     ALLOWED_HOSTS = ['www.gameshop.com', 'gameshop.com', 'gameshop-9nk6.onrender.com']
 
