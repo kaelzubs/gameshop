@@ -100,6 +100,8 @@ STORAGES = {
         'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
     },
 }
+
+# Database
 if DEBUG == False:
     DATABASES = {
         'default': {
@@ -111,6 +113,7 @@ if DEBUG == False:
             'PORT': config('DB_PORT')
         }
     }
+
 elif DEBUG == True:
     DATABASES = {
         'default': {
@@ -118,6 +121,7 @@ elif DEBUG == True:
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
+DATABASES = DATABASES
 
 # Auth
 AUTHENTICATION_BACKENDS = (
