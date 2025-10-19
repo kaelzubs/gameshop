@@ -88,6 +88,9 @@ MEDIAFILES_DIRS = [os.path.join(BASE_DIR, 'media')]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
+
+WHITENOISE_USE_FINDERS = True
+WHITENOISE_AUTOREFRESH = DEBUG
     
 STATICFILES_STORAGE = "gameshop.storage.WhiteNoiseStaticFilesStorage"
 MEDIAFILES_STORAGE = "gameshop.storage.MediaStorage"
