@@ -2,9 +2,8 @@ import os
 from decouple import config
 import secrets
 import string
-import dj_database_url
 
-
+# Generate a secure random secret key
 choices = string.ascii_letters + string.digits + "<>()[]*?@!#~,.;"
 key = "".join(secrets.choice(choices) for n in range(100))
 
@@ -91,8 +90,18 @@ MEDIAFILES_DIRS = [os.path.join(BASE_DIR, 'media')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 
+
+WHITENOISE_KEEP_ONLY_HASHED_FILES = True
+WHITENOISE_MAX_AGE = 31536000  # One year in seconds
+WHITENOISE_IMMUTABLE_FILE_TEST = lambda path, url: url.startswith(STATIC_URL)
+WHITENOISE_ALLOW_ALL_ORIGINS = True
 WHITENOISE_USE_FINDERS = True
-WHITENOISE_AUTOREFRESH = DEBUG
+WHITENOISE_AUTOREFRESH = True
+WHITENOISE_ROOT = STATIC_ROOT
+WHITENOISE_MIMETYPES = {
+    '.js': 'application/javascript',
+    '.css': 'text/css',
+}
     
 STATICFILES_STORAGE = "gameshop.storage.WhiteNoiseStaticFilesStorage"
 MEDIAFILES_STORAGE = "gameshop.storage.MediaStorage"
@@ -108,7 +117,7 @@ DATABASE_URL = config('DATABASE_URL')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'appliku.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
