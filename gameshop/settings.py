@@ -102,42 +102,14 @@ STORAGES = {
     },
 }
 
-# Database configuration using DATABASE_URL
-# DATABASE_URL = config('DATABASE_URL', default='sqlite:///db.sqlite3')
-if DEBUG == True:
-    DATABASES = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
-elif DEBUG == False:
-    DATABASE_URL = config('DATABASE_URL')
+DATABASE_URL = config('DATABASE_URL')
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
-
-# Database
-# if DEBUG == False:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#             'NAME': config('DB_NAME'),
-#             'USER': config('DB_USER'),
-#             'PASSWORD': config('DB_PASSWORD'),
-#             'HOST': config('DB_HOST'),
-#             'PORT': config('DB_PORT')
-#         }
-#     }
-
-# elif DEBUG == True:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.sqlite3',
-#             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#         }
-#     }
-# DATABASES = DATABASES
-
 # Auth
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
