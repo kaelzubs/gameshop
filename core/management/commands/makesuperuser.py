@@ -16,7 +16,7 @@ class Command(BaseCommand):
                 self.stdout.write("=======================")
                 self.stdout.write("A superuser has been created")
                 self.stdout.write(f"Email: {email}")
-                self.stdout.write(f"Username: {u.username}")
+                self.stdout.write(f"Username: {username}")
                 self.stdout.write(f"Password: {new_password}")
 
                 self.stdout.write("=======================")
