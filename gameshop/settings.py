@@ -2,6 +2,7 @@ import os
 from decouple import config
 import secrets
 import string
+import dj_database_url
 
 
 choices = string.ascii_letters + string.digits + "<>()[]*?@!#~,.;"
@@ -103,6 +104,13 @@ STORAGES = {
 
 # Database configuration using DATABASE_URL
 DATABASE_URL = config('DATABASE_URL', default='sqlite:///db.sqlite3')
+
+if ON_HEROKU:
+    DATABASE_URL = 'postgresql://<postgresql>'
+else:
+    DATABASE_URL = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
+
+DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
 
 # Database
 # if DEBUG == False:
