@@ -3,6 +3,8 @@ from decouple import config
 import secrets
 import string
 import dj_database_url
+import copy
+from django.conf import global_settings
 
 # Generate a secure random secret key
 choices = string.ascii_letters + string.digits + "<>()[]*?@!#~,.;"
@@ -109,11 +111,21 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 STATICFILES_STORAGE = "gameshop.storage.WhiteNoiseStaticFilesStorage"
 MEDIAFILES_STORAGE = "gameshop.storage.MediaStorage"
 
-STORAGES = {
-    'staticfiles': {
-        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
-    },
-}
+
+STORAGES = copy.deepcopy(global_settings.STORAGES)
+# Example using whitenoise compress
+STORAGES.update(
+    {
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+        },
+    }
+)
+# STORAGES = {
+#     'staticfiles': {
+#         'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+#     },
+# }
 
 # DATABASE_URL = config('DATABASE_URL')
 DATABASE_URL = config('DATABASE_URL')
