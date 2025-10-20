@@ -81,7 +81,7 @@ class Command(BaseCommand):
 
         # Create superuser in a transaction
         with transaction.atomic():
-            create_kwargs = {username_field: username, **extra_fields}
+            create_kwargs = {username_field: username}
             try:
                 UserModel._default_manager.create_superuser(**{**create_kwargs, 'password': password})
             except TypeError:
