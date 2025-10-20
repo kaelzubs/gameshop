@@ -103,11 +103,9 @@ STORAGES = {
 }
 
 # Database configuration using DATABASE_URL
-DATABASE_URL = config('DATABASE_URL', default='sqlite:///db.sqlite3')
-
-
+# DATABASE_URL = config('DATABASE_URL', default='sqlite:///db.sqlite3')
 if DEBUG == True:
-    DATABASE_URL = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
+    DATABASES = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
 elif DEBUG == False:
     DATABASE_URL = config('DATABASE_URL')
 
