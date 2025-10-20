@@ -43,15 +43,14 @@ class Command(BaseCommand):
 
         # Collect other required fields (except username)
         extra_fields = {}
-        
         # handle email if it's required or provided
-        # email_field_name = getattr(UserModel, 'EMAIL_FIELD', 'email')
-        # if email or (email_field_name in required_fields) or 'email' in required_fields:
-        #     if not email and not noinput:
-        #         email = input('Email address: ').strip()
-        #     if not email:
-        #         raise CommandError('Email is required (provide via --email or DJANGO_SUPERUSER_EMAIL)')
-        #     extra_fields[email_field_name] = email
+        email_field_name = getattr(UserModel, 'EMAIL_FIELD', 'email')
+        if email or (email_field_name in required_fields) or 'email' in required_fields:
+            if not email and not noinput:
+                email = input('Email address: ').strip()
+            if not email:
+                raise CommandError('Email is required (provide via --email or DJANGO_SUPERUSER_EMAIL)')
+            extra_fields[email_field_name] = email
 
         # Prompt for other REQUIRED_FIELDS
         for field in required_fields:
@@ -75,9 +74,9 @@ class Command(BaseCommand):
             if noinput:
                 raise CommandError('When using --noinput you must provide --password or set DJANGO_SUPERUSER_PASSWORD.')
             password = getpass.getpass()
-            # password2 = getpass.getpass(prompt='Password (again): ')
-            # if password != password2:
-            #     raise CommandError('Passwords do not match.')
+            password2 = getpass.getpass(prompt='Password (again): ')
+            if password != password2:
+                raise CommandError('Passwords do not match.')
 
         # Create superuser in a transaction
         with transaction.atomic():
