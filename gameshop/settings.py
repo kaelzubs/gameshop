@@ -109,9 +109,14 @@ if DEBUG == True:
 elif DEBUG == False:
     DATABASE_URL = config('DATABASE_URL')
 
-DATABASES = {'default': {
-    dj_database_url.config(default=DATABASE_URL),
-    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': dj_database_url.parse(DATABASE_URL).NAME,
+        'USER': dj_database_url.parse(DATABASE_URL).USER,
+        'PASSWORD': dj_database_url.parse(DATABASE_URL).PASSWORD,
+        'HOST': dj_database_url.parse(DATABASE_URL).HOST,
+        'PORT': dj_database_url.parse(DATABASE_URL).PORT,
     }}
 
 
