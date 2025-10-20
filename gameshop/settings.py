@@ -112,8 +112,8 @@ elif DEBUG == False:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        dj_database_url.config(default=DATABASE_URL),
-    }}
+    }
+}
 
 
 # Database
