@@ -10,11 +10,9 @@ class Command(BaseCommand):
         email = 'admin@example.com'
         new_password = get_random_string(10)
         try:
-            u = None
-
             if not User.objects.filter(is_superuser=True).exists():
                 self.stdout.write("No superusers found, creating one")
-                u = User.objects.create_superuser(email=email, password=new_password)
+                User.objects.create_superuser(email=email, password=new_password)
                 self.stdout.write("=======================")
                 self.stdout.write("A superuser has been created")
                 self.stdout.write(f"Email: {email}")

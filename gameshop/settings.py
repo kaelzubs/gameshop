@@ -11,7 +11,8 @@ key = "".join(secrets.choice(choices) for n in range(100))
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = key
+# SECRET_KEY = key
+SECRET_KEY = config('SECRET_KEY', default=key)
 
 DEBUG = config('DEBUG', default=False, cast=bool)
 
@@ -98,7 +99,7 @@ WHITENOISE_MAX_AGE = 31536000  # One year in seconds
 WHITENOISE_IMMUTABLE_FILE_TEST = lambda path, url: url.startswith(STATIC_URL)
 WHITENOISE_ALLOW_ALL_ORIGINS = True
 WHITENOISE_USE_FINDERS = True
-WHITENOISE_AUTOREFRESH = True
+WHITENOISE_AUTOREFRESH = DEBUG
 WHITENOISE_ROOT = STATIC_ROOT
 WHITENOISE_MIMETYPES = {
     '.js': 'application/javascript',
@@ -131,6 +132,25 @@ elif DEBUG == False:
     }
 DATABASES['default'] = dj_database_url.parse(DATABASE_URL, conn_max_age=600)
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'WARNING',
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    },
+}
 
 # Auth
 AUTHENTICATION_BACKENDS = (
