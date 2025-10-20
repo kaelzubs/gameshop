@@ -19,7 +19,8 @@ ALLOWED_HOSTS = []
 if DEBUG == True:
     ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 elif DEBUG == False:
-    ALLOWED_HOSTS = ['www.gameshop.com', 'gameshop.com', 'gameshop.applikuapp.com']
+    ALLOWED_HOSTS = ['.applikuapp.com']
+ALLOWED_HOSTS = ['gameshop.applikuapp.com', 'www.gameshop.applikuapp.com']
 
 
 INSTALLED_APPS = [
