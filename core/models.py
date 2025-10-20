@@ -3,7 +3,7 @@ from django.shortcuts import reverse
 
      
 class Product(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField()
     price = models.FloatField()
     slug = models.SlugField()
     description = models.TextField()

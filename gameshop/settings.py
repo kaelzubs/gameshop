@@ -109,7 +109,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 # }
     
 STATICFILES_STORAGE = "gameshop.storage.WhiteNoiseStaticFilesStorage"
-MEDIAFILES_STORAGE = "gameshop.storage.MediaStorage"
+MEDIAFILES_STORAGE = "gameshop.storage.whiteNoiseMediaStorage"
 
 
 STORAGES = copy.deepcopy(global_settings.STORAGES)
