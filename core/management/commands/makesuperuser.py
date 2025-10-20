@@ -76,6 +76,7 @@ class Command(BaseCommand):
             password = getpass.getpass()
             password2 = getpass.getpass(prompt='Password (again): ')
             if password != password2:
+                password2 = password
                 raise CommandError('Passwords do not match.')
 
         # Create superuser in a transaction
