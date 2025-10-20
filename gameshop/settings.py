@@ -13,12 +13,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = key
 
-DEBUG = False
+DEBUG = config('DEBUG', default=False, cast=bool)
 
+ALLOWED_HOSTS = []
 if DEBUG == True:
     ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 elif DEBUG == False:
-    ALLOWED_HOSTS = ['www.gameshop.com', 'gameshop.com', 'gameshop-9nk6.onrender.com']
+    ALLOWED_HOSTS = ['www.gameshop.com', 'gameshop.com', 'gameshop.applikuapp.com']
 
 
 INSTALLED_APPS = [
@@ -110,6 +111,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
 # Auth
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
