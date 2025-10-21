@@ -112,20 +112,21 @@ STATICFILES_STORAGE = "gameshop.storage.WhiteNoiseStaticFilesStorage"
 MEDIAFILES_STORAGE = "gameshop.storage.whiteNoiseMediaFilesStorage"
 
 
-# STORAGES = copy.deepcopy(global_settings.STORAGES)
-# # Example using whitenoise compress
-# STORAGES.update(
-#     {
-#         "staticfiles": {
-#             "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
-#         },
-#     }
-# )
-STORAGES = {
-    'staticfiles': {
-        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
-    },
-}
+STORAGES = copy.deepcopy(global_settings.STORAGES)
+# Example using whitenoise compress
+STORAGES.update(
+    {
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+        },
+    }
+)
+
+# STORAGES = {
+#     'staticfiles': {
+#         'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+#     },
+# }
 
 DATABASE_URL = config('DATABASE_URL')
 if DEBUG == True:
